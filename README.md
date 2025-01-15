@@ -1,5 +1,5 @@
 # SilverNotif
----
+
 SilverNotiff est un bot discord qui envoi une notification lors d'une vidéo poster sur youtube.
 *(en dev mais fonctionel)*
 ---
