@@ -5,5 +5,5 @@ SilverNotiff est un bot discord qui envoi une notification lors d'une vidéo pos
 ---
 by [SilverCore](https://github.com/SilverCore-Git)
 Merci de soutenir les projets SilverCore !
-[Vous pouvez nous aider](https://tipeee.com/silverdium).
+[Vous pouvez nous aider](https://tipeee.com/silverdium).<br>
 Tous droits reserver (c)
