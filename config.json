@@ -1,10 +1,32 @@
 {
-    "Token": "your token",
-    "ApiKey": "api key",
 
-    "ChanelId": "UCEFnv5MxbU9kh87ahSfaZnQ",
+    "General": {
 
-    "SalonId_ytb": 123456789123456789,
+        "Token": "YOUR TOKEN HERE",
+        "ApiKey": "YOUTUBE API KEY",
+        "activity": "BOT ACTIVITY/STATUS"
 
-    "SalonId_log": 123456789123456789
+    },
+
+    "Message": {
+
+        "Prefix": "[SilverNotiff]>",
+
+        "Prefix_ERR": "[ERROR_SilverNotiff]>",
+
+        "NewVideo": "New video on the YouTube channel of",
+        "BotConect": "The bot is connected as",
+        "APIConectERR": "Error on Youtube API connection"
+
+    },
+
+
+    "ChanelId": "YOUTUBE CHANEL ID",
+
+
+    "Salon": {
+
+        "SalonId_ytb": 123456789123456789
+
+    }
 }
