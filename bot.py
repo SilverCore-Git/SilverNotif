@@ -1,41 +1,60 @@
+
+# By = SilverCore - SilverNotif
+# Version = 2.0
+# Help SilverCore : https://fr.tipeee.com/silverdium
+# Web site = https://core.silverdium.fr
+
+
+# Import libs
 import discord
 import json
 import requests
 from discord.ext import commands, tasks
 
-
+# import config
 with open("config.json", "r") as file:
     cfg = json.load(file)
 
-DISCORD_TOKEN = cfg["Token"]
-YOUTUBE_API_KEY = cfg["ApiKey"]
+# get config
+DISCORD_TOKEN = cfg["General"]["Token"]
+YOUTUBE_API_KEY = cfg["General"]["ApiKey"]
 YOUTUBE_CHANNEL_ID = cfg["ChanelId"]
-DISCORD_CHANNEL_ID = cfg["SalonId_ytb"]
 
+PREFIX = cfg["Message"]["Prefix"]
+PREFIX_ERR = cfg["Message"]["Prefix_ERR"]
+
+MSG_CONECT = cfg["Message"]["BotConect"]
+MSG_ERRORAPI = cfg["Message"]["APIConectERR"]
+MSG_NEWVIDEO = cfg["Message"]["NewVideo"]
+
+DISCORD_ACTIVITY = cfg["General"]["activity"]
+DISCORD_CHANNEL_ID = cfg["Salon"]["SalonId_ytb"]
+
+# Divers var
+last_video_id = None
+url = f"https://www.googleapis.com/youtube/v3/search?part=snippet&channelId={YOUTUBE_CHANNEL_ID}&order=date&type=video&maxResults=1&key={YOUTUBE_API_KEY}"
+
+# général bot config
 intents = discord.Intents.all()
 bot = commands.Bot(command_prefix="!", intents=intents)
 
-last_video_id = None
-
+# Bot is on ready do :
 @bot.event
 async def on_ready():
-    print(f"Bot connecté en tant que {bot.user}")
-    activity = discord.CustomActivity(name=cfg["activity"])
+    print(f"{PREFIX} {MSG_CONECT} : {bot.user}")
+    activity = discord.CustomActivity(name=DISCORD_ACTIVITY)
     await bot.change_presence(status=discord.Status.online, activity=activity)
     check_new_video.start()
 
+# Every 5 minutes bot do :
 @tasks.loop(minutes=5)
 async def check_new_video():
 
     global last_video_id
-    url = f"https://www.googleapis.com/youtube/v3/search?part=snippet&channelId={YOUTUBE_CHANNEL_ID}&order=date&type=video&maxResults=1&key={YOUTUBE_API_KEY}"
     response = requests.get(url)
 
     if response.status_code == 200:
         data = response.json()
-        salon_id = cfg["SalonId_ytb"]
-        salon = bot.get_channel(salon_id)
-
 
         if data["items"]:
             channelytb = data["items"][0]["snippet"]["channelTitle"]
@@ -47,13 +66,14 @@ async def check_new_video():
                 last_video_id = video_id 
                 channel = bot.get_channel(DISCORD_CHANNEL_ID)
                 if channel:
-                    await channel.send(f"# Nouvelle vidéo publiée sur la chaine youtube de {channelytb} : \n# **[{video_title}]({video_url})**\n{video_url}")
-                print(f"Nouvelle vidéo publiée sur la chaine youtube de {channelytb} :")
-                print(video_url)
-                print(video_title)
+                    await channel.send(f"# {MSG_NEWVIDEO} {channelytb} : \n# **[{video_title}]({video_url})**\n{video_url}")
+                print(f"{PREFIX} {MSG_NEWVIDEO} {channelytb} :")
+                print(f"{PREFIX} {video_url}")
+                print(f"{PREFIX} {video_title}")
 
     else:
-        print(f"Erreur lors de l'accès à l'API YouTube : {response.status_code}")
+        print(f"{PREFIX_ERR} {MSG_ERRORAPI} : {response.status_code}")
 
 
+# start the bot
 bot.run(DISCORD_TOKEN)
