@@ -21,28 +21,40 @@ last_video_id = None
 @bot.event
 async def on_ready():
     print(f"Bot connecté en tant que {bot.user}")
+    activity = discord.CustomActivity(name=cfg["activity"])
+    await bot.change_presence(status=discord.Status.online, activity=activity)
     check_new_video.start()
 
 @tasks.loop(minutes=5)
 async def check_new_video():
+
     global last_video_id
     url = f"https://www.googleapis.com/youtube/v3/search?part=snippet&channelId={YOUTUBE_CHANNEL_ID}&order=date&type=video&maxResults=1&key={YOUTUBE_API_KEY}"
     response = requests.get(url)
+
     if response.status_code == 200:
         data = response.json()
+        salon_id = cfg["SalonId_ytb"]
+        salon = bot.get_channel(salon_id)
+
+
         if data["items"]:
+            channelytb = data["items"][0]["snippet"]["channelTitle"]
             video = data["items"][0]
             video_id = video["id"]["videoId"]
             video_title = video["snippet"]["title"]
             video_url = f"https://www.youtube.com/watch?v={video_id}"
-
-
             if video_id != last_video_id:
                 last_video_id = video_id 
                 channel = bot.get_channel(DISCORD_CHANNEL_ID)
                 if channel:
-                    await channel.send(f"# Nouvelle vidéo publiée sur la chaine de Silverdium : \n# **[{video_title}]({video_url})**\n{video_url}")
+                    await channel.send(f"# Nouvelle vidéo publiée sur la chaine youtube de {channelytb} : \n# **[{video_title}]({video_url})**\n{video_url}")
+                print(f"Nouvelle vidéo publiée sur la chaine youtube de {channelytb} :")
+                print(video_url)
+                print(video_title)
+
     else:
         print(f"Erreur lors de l'accès à l'API YouTube : {response.status_code}")
+
 
 bot.run(DISCORD_TOKEN)
