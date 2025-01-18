@@ -50,7 +50,7 @@ SilverNotiff est un bot discord qui envoi une notification lors d'une vidéo pos
  - 📋 ACTIVITY :
     - Deffinisez ce qui va s'afficher en dessous du bot (status)
 
- - 🆔 ChanelID :
+ - 🏷️ ChanelID :
     - Il s'agit de l'identifiant de la chaine youtube
     - Rendez vous sur votre [youtube studio](https://studio.youtube.com)
     - Dans le menu à gauche, cliquez sur Paramètres > Général.
@@ -62,10 +62,6 @@ SilverNotiff est un bot discord qui envoi une notification lors d'une vidéo pos
     - Paramettre > Avancés > Mode développeur
     - Faite click droit sur le salon voulu puis ``Copier l'identifiant du salon``
     - Coller l'ID a la place de ``123456789123456789``
-
- - 🏷️ SalonId_LOG :
-    - Il s'agit de l'ID du salon Log (optionel)
-    - recupérer cette id comme avec "SalonID_YTB"
 
 
 ---
