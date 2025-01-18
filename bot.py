@@ -9,7 +9,6 @@ with open("config.json", "r") as file:
 
 DISCORD_TOKEN = cfg["Token"]
 YOUTUBE_API_KEY = cfg["ApiKey"]
-# https://ytubetool.com/fr/tools/youtube-channel-id
 YOUTUBE_CHANNEL_ID = cfg["ChanelId"]
 DISCORD_CHANNEL_ID = cfg["SalonId_ytb"]
 
