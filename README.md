@@ -11,16 +11,16 @@ SilverNotiff est un bot discord qui envoi une notification lorsqu'une vidéo est
 ## 🛠️  Créez une app Discord
 - Créez une app nomée SilverNorif sur [discord.com/developers](https://discord.com/developers/applications)
   - Dans la configuration de l'app, dans la catégorie "Bot"
-    - decochez "Public Bot"
-    - cochez les trois permissions : "Presence Intent", "Server Members Intent" et "Message Content Intent"
+    - Décochez "Public Bot"
+    - Cochez les trois permissions : "Presence Intent", "Server Members Intent" et "Message Content Intent"
 
 ## 🕹️  Pour utiliser SilverNotif
 - Téléchargez la derniere [releases](https://github.com/SilverCore-Git/SilverNotif/releases)
 - Déplacez les fichiers du bot dans un dossier dédié
 - Ouvrez un terminal dans le dossier dédié. Y accéder avec ``cd chemin vers le dossier``
-- Executez la commande ``pip install discord.py json requests``
+- Exécutez la commande ``pip install discord.py json requests``
 - Modifiez la configuration dans le fichier ``config.json``
-- Executez le bot en ouvrant ``bot.py`` avec ``python`` ou <br>
+- Exécutez le bot en ouvrant ``bot.py`` avec ``python`` ou <br>
   avec la commande ``python bot.py`` ou ``py bot.py``
 
 ## ⚙️  Pour configurer ``config.json``
